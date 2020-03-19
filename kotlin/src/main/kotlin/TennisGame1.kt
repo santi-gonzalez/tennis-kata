@@ -10,15 +10,15 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
             m_score2 += 1
     }
 
-    override fun getScore(): String {
-        return if (m_score1 == m_score2) {
-            mapEqualScore()
-        } else if (m_score1 >= 4 || m_score2 >= 4) {
-            mapDifferenceScore("")
-        } else {
-            mapScore(0, "")
+    override fun getScore() = when {
+            scoreAreEqual() -> mapEqualScore()
+            anyScoreIsMoreThanFour() -> mapDifferenceScore("")
+            else -> mapScore(0, "")
         }
-    }
+
+    private fun anyScoreIsMoreThanFour() = m_score1 >= 4 || m_score2 >= 4
+
+    private fun scoreAreEqual() = m_score1 == m_score2
 
     private fun mapScore(tempScore: Int, score: String): String {
         var tempScore1 = tempScore
