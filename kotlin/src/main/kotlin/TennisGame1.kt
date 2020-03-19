@@ -14,12 +14,7 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
         var score = ""
         var tempScore = 0
         if (m_score1 == m_score2) {
-            when (m_score1) {
-                0 -> score = "Love-All"
-                1 -> score = "Fifteen-All"
-                2 -> score = "Thirty-All"
-                else -> score = "Deuce"
-            }
+            score = mapEqualScore()
         } else if (m_score1 >= 4 || m_score2 >= 4) {
             val minusResult = m_score1 - m_score2
             if (minusResult == 1)
@@ -47,5 +42,14 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
             }
         }
         return score
+    }
+
+    private fun mapEqualScore(): String {
+        return when (m_score1) {
+            0 -> "Love-All"
+            1 -> "Fifteen-All"
+            2 -> "Thirty-All"
+            else -> "Deuce"
+        }
     }
 }
