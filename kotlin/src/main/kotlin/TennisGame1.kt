@@ -23,21 +23,23 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
     private fun mapScore(): String {
         var tempScore1 = 0
         var score1 = ""
-        for (i in 1..2) {
-            if (i == 1)
-                tempScore1 = m_score1
-            else {
-                score1 += "-"
-                tempScore1 = m_score2
-            }
-            when (tempScore1) {
-                0 -> score1 += "Love"
-                1 -> score1 += "Fifteen"
-                2 -> score1 += "Thirty"
-                3 -> score1 += "Forty"
-            }
-        }
+        tempScore1 = m_score1
+        score1 = addScoreName(tempScore1, score1)
+        score1 += "-"
+        tempScore1 = m_score2
+        score1 = addScoreName(tempScore1, score1)
         return score1
+    }
+
+    private fun addScoreName(tempScore1: Int, score1: String): String {
+        var score11 = score1
+        when (tempScore1) {
+            0 -> score11 += "Love"
+            1 -> score11 += "Fifteen"
+            2 -> score11 += "Thirty"
+            3 -> score11 += "Forty"
+        }
+        return score11
     }
 
     private fun mapDifferenceScore(score: String): String {
