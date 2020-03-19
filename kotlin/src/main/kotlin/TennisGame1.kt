@@ -30,15 +30,18 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
         else -> ""
     }
 
-    private fun mapDifferenceScore(): String {
-        val scoreDifference = player1Score - player2Score
-        return when {
-            scoreDifference == 1 -> "Advantage player1"
-            scoreDifference == -1 -> "Advantage player2"
-            scoreDifference >= 2 -> "Win for player1"
-            else -> "Win for player2"
-        }
+    private fun mapDifferenceScore(): String = when {
+        isPlayer1Advantage() -> "Advantage player1"
+        isPlayer2Advantage() -> "Advantage player2"
+        isPlayer1Won() -> "Win for player1"
+        else -> "Win for player2"
     }
+
+    private fun isPlayer1Advantage() = player1Score - player2Score == 1
+
+    private fun isPlayer2Advantage() = player1Score - player2Score == -1
+
+    private fun isPlayer1Won() = player1Score - player2Score >= 2
 
     private fun mapEqualScore(): String = when (player1Score) {
         0 -> "Love-All"
