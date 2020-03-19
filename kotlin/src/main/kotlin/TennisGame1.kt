@@ -11,37 +11,45 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
     }
 
     override fun getScore(): String {
-        var score = ""
-        var tempScore = 0
-        if (m_score1 == m_score2) {
-            score = mapEqualScore()
+        return if (m_score1 == m_score2) {
+            mapEqualScore()
         } else if (m_score1 >= 4 || m_score2 >= 4) {
-            val minusResult = m_score1 - m_score2
-            if (minusResult == 1)
-                score = "Advantage player1"
-            else if (minusResult == -1)
-                score = "Advantage player2"
-            else if (minusResult >= 2)
-                score = "Win for player1"
-            else
-                score = "Win for player2"
+            mapDifferenceScore("")
         } else {
-            for (i in 1..2) {
-                if (i == 1)
-                    tempScore = m_score1
-                else {
-                    score += "-"
-                    tempScore = m_score2
-                }
-                when (tempScore) {
-                    0 -> score += "Love"
-                    1 -> score += "Fifteen"
-                    2 -> score += "Thirty"
-                    3 -> score += "Forty"
-                }
+            mapScore(0, "")
+        }
+    }
+
+    private fun mapScore(tempScore: Int, score: String): String {
+        var tempScore1 = tempScore
+        var score1 = score
+        for (i in 1..2) {
+            if (i == 1)
+                tempScore1 = m_score1
+            else {
+                score1 += "-"
+                tempScore1 = m_score2
+            }
+            when (tempScore1) {
+                0 -> score1 += "Love"
+                1 -> score1 += "Fifteen"
+                2 -> score1 += "Thirty"
+                3 -> score1 += "Forty"
             }
         }
-        return score
+        return score1
+    }
+
+    private fun mapDifferenceScore(score: String): String {
+        var score1 = score
+        val minusResult = m_score1 - m_score2
+        score1 = when {
+            minusResult == 1 -> "Advantage player1"
+            minusResult == -1 -> "Advantage player2"
+            minusResult >= 2 -> "Win for player1"
+            else -> "Win for player2"
+        }
+        return score1
     }
 
     private fun mapEqualScore(): String {
