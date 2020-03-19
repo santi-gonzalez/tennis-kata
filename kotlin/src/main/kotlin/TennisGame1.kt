@@ -20,26 +20,14 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
 
     private fun scoreAreEqual() = m_score1 == m_score2
 
-    private fun mapScore(): String {
-        var tempScore1 = 0
-        var score1 = ""
-        tempScore1 = m_score1
-        score1 = addScoreName(tempScore1, score1)
-        score1 += "-"
-        tempScore1 = m_score2
-        score1 = addScoreName(tempScore1, score1)
-        return score1
-    }
+    private fun mapScore(): String = addScoreName(m_score1) + "-" + addScoreName(m_score2)
 
-    private fun addScoreName(tempScore1: Int, score1: String): String {
-        var score11 = score1
-        when (tempScore1) {
-            0 -> score11 += "Love"
-            1 -> score11 += "Fifteen"
-            2 -> score11 += "Thirty"
-            3 -> score11 += "Forty"
-        }
-        return score11
+    private fun addScoreName(playerScore: Int): String = when (playerScore) {
+        0 -> "Love"
+        1 -> "Fifteen"
+        2 -> "Thirty"
+        3 -> "Forty"
+        else -> ""
     }
 
     private fun mapDifferenceScore(score: String): String {
