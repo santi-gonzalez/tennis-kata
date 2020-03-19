@@ -12,7 +12,7 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
 
     override fun getScore() = when {
             scoreAreEqual() -> mapEqualScore()
-            anyScoreIsMoreThanFour() -> mapDifferenceScore("")
+            anyScoreIsMoreThanFour() -> mapDifferenceScore()
             else -> mapScore()
         }
 
@@ -30,24 +30,20 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
         else -> ""
     }
 
-    private fun mapDifferenceScore(score: String): String {
-        var score1 = score
-        val minusResult = player1Score - player2Score
-        score1 = when {
-            minusResult == 1 -> "Advantage player1"
-            minusResult == -1 -> "Advantage player2"
-            minusResult >= 2 -> "Win for player1"
+    private fun mapDifferenceScore(): String {
+        val scoreDifference = player1Score - player2Score
+        return when {
+            scoreDifference == 1 -> "Advantage player1"
+            scoreDifference == -1 -> "Advantage player2"
+            scoreDifference >= 2 -> "Win for player1"
             else -> "Win for player2"
         }
-        return score1
     }
 
-    private fun mapEqualScore(): String {
-        return when (player1Score) {
-            0 -> "Love-All"
-            1 -> "Fifteen-All"
-            2 -> "Thirty-All"
-            else -> "Deuce"
-        }
+    private fun mapEqualScore(): String = when (player1Score) {
+        0 -> "Love-All"
+        1 -> "Fifteen-All"
+        2 -> "Thirty-All"
+        else -> "Deuce"
     }
 }
