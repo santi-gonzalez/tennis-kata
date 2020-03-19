@@ -1,5 +1,4 @@
-class TennisGame1(private val player1Name: String, private val player2Name: String) : TennisGame {
-
+class TennisGame1 : TennisGame {
     private var player1Score: Int = 0
     private var player2Score: Int = 0
 
